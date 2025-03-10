@@ -1,0 +1,16 @@
+version: '3'
+services:
+  debian-desktop:
+    build: .
+    container_name: debian-novnc
+    ports:
+      - "6980:80"
+    environment:
+      - RESOLUTION=1920x1080
+      - PULSE_SERVER=unix:/tmp/pulseaudio.socket
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /run/user/1000/pulse:/run/user/1000/pulse
+    devices:
+      - /dev/snd
+    restart: unless-stopped
